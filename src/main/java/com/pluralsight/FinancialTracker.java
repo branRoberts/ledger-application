@@ -78,7 +78,7 @@ public class FinancialTracker {
         //       parse the five fields, build a Transaction object,
         //       and add it to the transactions list.
         try {
-            FileWriter fw = new FileWriter(fileName, true);
+
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -92,7 +92,6 @@ public class FinancialTracker {
                 transactions.add(new Transaction(importedDate, importedTime, importedName, importedBrand, importedAmount));
             }
             reader.close();
-            fw.close();
         }catch (Exception e) {
             System.out.println("Error opening file: " + fileName);
         }
@@ -110,7 +109,7 @@ public class FinancialTracker {
      */
     private static void addDeposit(Scanner scanner) {
         // TODO
-        System.out.println("Enter Date and Time:");
+        System.out.println("Enter Date and Time: (yyyy-mm-dd and HH:mm:ss)");
 
     }
 
