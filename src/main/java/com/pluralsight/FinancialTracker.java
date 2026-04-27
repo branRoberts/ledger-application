@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -77,14 +78,21 @@ public class FinancialTracker {
         //       parse the five fields, build a Transaction object,
         //       and add it to the transactions list.
         try {
+            FileWriter fw = new FileWriter(fileName, true);
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split("\\|");
+                LocalDate importedDate = LocalDate.parse(data[0], DATE_FMT);
+                LocalTime importedTime = LocalTime.parse(data[1], TIME_FMT);
+                String importedName = data[2];
+                String importedBrand = (data[3]);
+                double importedAmount = Double.parseDouble(data[4]);
 
-
+                transactions.add(new Transaction(importedDate, importedTime, importedName, importedBrand, importedAmount));
             }
-
+            reader.close();
+            fw.close();
         }catch (Exception e) {
             System.out.println("Error opening file: " + fileName);
         }
@@ -102,6 +110,8 @@ public class FinancialTracker {
      */
     private static void addDeposit(Scanner scanner) {
         // TODO
+        System.out.println("Enter Date and Time:");
+
     }
 
     /**
@@ -130,7 +140,7 @@ public class FinancialTracker {
             String input = scanner.nextLine().trim();
 
             switch (input.toUpperCase()) {
-                case "A" -> displayLedger();
+                case "A" -> displayLedger(transactions);
                 case "D" -> displayDeposits();
                 case "P" -> displayPayments();
                 case "R" -> reportsMenu(scanner);
@@ -143,7 +153,11 @@ public class FinancialTracker {
     /* ------------------------------------------------------------------
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
-    private static void displayLedger() { /* TODO – print all transactions in column format */ }
+    private static void displayLedger(ArrayList<Transaction> transactions) { /* TODO – print all transactions in column format */
+    for (Transaction displayTransaction : transactions) {
+        System.out.println(displayTransaction.toString());
+    }
+    }
 
     private static void displayDeposits() { /* TODO – only amount > 0               */ }
 

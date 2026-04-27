@@ -7,14 +7,14 @@ public class Transaction {
     private LocalDate date;
     private LocalTime time;
     private String name;
-    private String brand;
+    private String vendor;
     private double amount;
 
-    public Transaction(LocalDate date, LocalTime time, String name, String brand, double amount) {
+    public Transaction(LocalDate date, LocalTime time, String name, String vendor, double amount) {
         this.date = date;
         this.time = time;
         this.name = name;
-        this.brand = brand;
+        this.vendor = vendor;
         this.amount = amount;
     }
 
@@ -42,12 +42,12 @@ public class Transaction {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getVendor() {
+        return vendor;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
     }
 
     public double getAmount() {
