@@ -1,9 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -110,6 +107,7 @@ public class FinancialTracker {
      */
     private static void addDeposit(Scanner scanner) {
         // TODO
+
         System.out.println("Enter Date: (yyyy-mm-dd and HH:mm:ss)");
           String addDateTime = scanner.nextLine();
           LocalDateTime formattedDateTime = LocalDateTime.parse(addDateTime, DATETIME_FMT);
@@ -119,12 +117,24 @@ public class FinancialTracker {
         String addDescription = scanner.nextLine();
         System.out.println("Enter vendor:");
         String addVendor = scanner.nextLine();
-        System.out.println("Enter amount:");
-        double addAmount = Double.parseDouble(scanner.nextLine());
-        if (addAmount <= 0){
-            System.out.println("Deposited amount: " + addAmount + " is invalid, input a positive number");
+        double addAmount = 0;
+        do{
+            System.out.println("Enter amount:");
+            addAmount = Double.parseDouble(scanner.nextLine());
+            if (addAmount <= 0){
+                System.out.println("Deposited amount: " + addAmount + " is invalid, input a positive number");
+            }else {
+                System.out.println("Deposited amount: " + addAmount + " is valid");
+            }
+        }while (addAmount <= 0);
+        transactions.add(new Transaction(formattedDate, formattedTime, addDescription, addVendor, addAmount));
+        try {
+            FileWriter fw = new FileWriter(FILE_NAME,true);
+            fw.write(formattedDate + "|" + formattedTime + "|" + addDescription + "|" + addVendor + "|" + addAmount + "\n");
+            fw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
     }
 
     /**
