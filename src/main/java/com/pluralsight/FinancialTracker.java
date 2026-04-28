@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -109,7 +110,20 @@ public class FinancialTracker {
      */
     private static void addDeposit(Scanner scanner) {
         // TODO
-        System.out.println("Enter Date and Time: (yyyy-mm-dd and HH:mm:ss)");
+        System.out.println("Enter Date: (yyyy-mm-dd and HH:mm:ss)");
+          String addDateTime = scanner.nextLine();
+          LocalDateTime formattedDateTime = LocalDateTime.parse(addDateTime, DATETIME_FMT);
+          LocalDate formattedDate = formattedDateTime.toLocalDate();
+          LocalTime formattedTime = formattedDateTime.toLocalTime();
+        System.out.println("Enter description:");
+        String addDescription = scanner.nextLine();
+        System.out.println("Enter vendor:");
+        String addVendor = scanner.nextLine();
+        System.out.println("Enter amount:");
+        double addAmount = Double.parseDouble(scanner.nextLine());
+        if (addAmount <= 0){
+            System.out.println("Deposited amount: " + addAmount + " is invalid, input a positive number");
+        }
 
     }
 
@@ -158,7 +172,9 @@ public class FinancialTracker {
     }
     }
 
-    private static void displayDeposits() { /* TODO – only amount > 0               */ }
+    private static void displayDeposits() { /* TODO – only amount > 0               */
+
+    }
 
     private static void displayPayments() { /* TODO – only amount < 0               */ }
 
