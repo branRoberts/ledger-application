@@ -219,8 +219,10 @@ public class FinancialTracker {
 
     private static void displayPayments(ArrayList<Transaction> transactions) { /* TODO – only amount < 0               */
     for (Transaction transaction : transactions) {
-        if (transaction.getAmount() < 0){}
-        System.out.println(transaction.toString());
+        if (transaction.getAmount() < 0){
+            System.out.println(transaction.toString());
+        }
+
     }
     }
 
