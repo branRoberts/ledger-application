@@ -191,8 +191,8 @@ public class FinancialTracker {
 
             switch (input.toUpperCase()) {
                 case "A" -> displayLedger(transactions);
-                case "D" -> displayDeposits();
-                case "P" -> displayPayments();
+                case "D" -> displayDeposits(transactions);
+                case "P" -> displayPayments(transactions);
                 case "R" -> reportsMenu(scanner);
                 case "H" -> running = false;
                 default -> System.out.println("Invalid option");
@@ -209,11 +209,20 @@ public class FinancialTracker {
     }
     }
 
-    private static void displayDeposits() { /* TODO – only amount > 0               */
-
+    private static void displayDeposits(ArrayList<Transaction> transactions) { /* TODO – only amount > 0               */
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0){
+                System.out.println(transaction.toString());
+            }
+        }
     }
 
-    private static void displayPayments() { /* TODO – only amount < 0               */ }
+    private static void displayPayments(ArrayList<Transaction> transactions) { /* TODO – only amount < 0               */
+    for (Transaction transaction : transactions) {
+        if (transaction.getAmount() < 0){}
+        System.out.println(transaction.toString());
+    }
+    }
 
     /* ------------------------------------------------------------------
        Reports menu
