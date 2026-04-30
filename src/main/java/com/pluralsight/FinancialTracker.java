@@ -87,12 +87,14 @@ public class FinancialTracker {
                 String importedBrand = (data[3]);
                 double importedAmount = Double.parseDouble(data[4]);
 
+
                 transactions.add(new Transaction(importedDate, importedTime, importedName, importedBrand, importedAmount));
             }
             reader.close();
         }catch (Exception e) {
             System.out.println("Error opening file: " + fileName);
         }
+        transactions.sort((Transaction t1, Transaction t2) -> t2.getDate().compareTo(t1.getDate()));
     }
 
     /* ------------------------------------------------------------------
@@ -135,12 +137,12 @@ public class FinancialTracker {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        transactions.sort((Transaction t1, Transaction t2) -> t2.getDate().compareTo(t1.getDate()));
     }
 
     /**
-     * Same prompts as addDeposit.
-     * Amount must be entered as a positive number,
-     * then converted to a negative amount before storing.
+     *
+     * @param scanner
      */
     private static void addPayment(Scanner scanner) {
         // TODO
@@ -171,12 +173,14 @@ public class FinancialTracker {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        transactions.sort((Transaction t1, Transaction t2) -> t2.getDate().compareTo(t1.getDate()));
     }
 
     /* ------------------------------------------------------------------
        Ledger menu
        ------------------------------------------------------------------ */
     private static void ledgerMenu(Scanner scanner) {
+
         boolean running = true;
         while (running) {
             System.out.println("Ledger");
@@ -244,6 +248,7 @@ public class FinancialTracker {
 
             String input = scanner.nextLine().trim();
 
+
             switch (input) {
                 case "1" -> {/* TODO – month-to-date report */
                     LocalDate localDateEnd = LocalDate.now();
@@ -257,10 +262,16 @@ public class FinancialTracker {
                     filterTransactionsByDate(localDatePreviousMonthStart, localDatePreviousMonthEnd);
                 }
                 case "3" -> {/* TODO – year-to-date report   */
-
+                    LocalDate localDateYearStart =LocalDate.now().withDayOfYear(1);
+                    LocalDate localDateEnd = LocalDate.now();
+                    filterTransactionsByDate(localDateYearStart, localDateEnd);
                 }
-                case "4" -> {/* TODO – previous year report  */ }
-                case "5" -> {/* TODO – prompt for vendor then report */ }
+                case "4" -> {/* TODO – previous year report  */
+                    LocalDate localDatePreviousYearStart = LocalDate.now().minusYears(1).withDayOfYear(1);
+                    LocalDate localDatePreviousYearEnd =  localDatePreviousYearStart.withDayOfYear(localDatePreviousYearStart.lengthOfYear());
+                    filterTransactionsByDate(localDatePreviousYearStart, localDatePreviousYearEnd);
+                }
+                case "5" -> {/* TODO – prompt for vendor then report */}
                 case "6" -> customSearch(scanner);
                 case "0" -> running = false;
                 default -> System.out.println("Invalid option");
@@ -282,7 +293,6 @@ public class FinancialTracker {
 
     private static void filterTransactionsByVendor(String vendor) {
         // TODO – iterate transactions, print those with matching vendor
-
     }
 
     private static void customSearch(Scanner scanner) {
