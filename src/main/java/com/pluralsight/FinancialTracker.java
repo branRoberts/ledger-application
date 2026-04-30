@@ -108,17 +108,11 @@ public class FinancialTracker {
      * Store the amount as-is (positive) and append to the file.
      */
     private static void addDeposit(Scanner scanner) {
-        // TODO
+        String[] userInput = userInputAdd(scanner);
+        LocalDateTime formattedDateTime = LocalDateTime.parse(userInput[0], DATETIME_FMT);
+        LocalDate formattedDate = formattedDateTime.toLocalDate();
+        LocalTime formattedTime = formattedDateTime.toLocalTime();
 
-        System.out.println("Enter Date: (yyyy-mm-dd and HH:mm:ss)");
-          String addDateTime = scanner.nextLine();
-          LocalDateTime formattedDateTime = LocalDateTime.parse(addDateTime, DATETIME_FMT);
-          LocalDate formattedDate = formattedDateTime.toLocalDate();
-          LocalTime formattedTime = formattedDateTime.toLocalTime();
-        System.out.println("Enter description:");
-        String addDescription = scanner.nextLine();
-        System.out.println("Enter vendor:");
-        String addVendor = scanner.nextLine();
         double addAmount = 0;
         do{
             System.out.println("Enter amount:");
@@ -129,11 +123,12 @@ public class FinancialTracker {
                 System.out.println("Deposited amount: " + addAmount + " is valid");
             }
         }while (addAmount <= 0);
-        transactions.add(new Transaction(formattedDate, formattedTime, addDescription, addVendor, addAmount));
+        transactions.add(new Transaction(formattedDate, formattedTime, userInput[1], userInput[2], addAmount));
         try {
             FileWriter fw = new FileWriter(FILE_NAME,true);
-            fw.write(formattedDate + "|" + formattedTime + "|" + addDescription + "|" + addVendor + "|" + addAmount + "\n");
-            fw.close();
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(formattedDate + "|" + formattedTime + "|" + userInput[1] + "|" + userInput[2] + "|" + addAmount + "\n");
+            bw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -146,15 +141,10 @@ public class FinancialTracker {
      */
     private static void addPayment(Scanner scanner) {
         // TODO
-        System.out.println("Enter Date: (yyyy-mm-dd and HH:mm:ss)");
-        String addDateTime = scanner.nextLine();
-        LocalDateTime formattedDateTime = LocalDateTime.parse(addDateTime, DATETIME_FMT);
+        String[] userInput = userInputAdd(scanner);
+        LocalDateTime formattedDateTime = LocalDateTime.parse(userInput[0], DATETIME_FMT);
         LocalDate formattedDate = formattedDateTime.toLocalDate();
         LocalTime formattedTime = formattedDateTime.toLocalTime();
-        System.out.println("Enter description:");
-        String addDescription = scanner.nextLine();
-        System.out.println("Enter vendor:");
-        String addVendor = scanner.nextLine();
         double inputPaymentAmount = 0;
         do{
             System.out.println("Enter amount:");
@@ -165,17 +155,27 @@ public class FinancialTracker {
                 System.out.println("Payment amount: " + inputPaymentAmount + " is valid");
             }
         }while (inputPaymentAmount <= 0);
-        transactions.add(new Transaction(formattedDate, formattedTime, addDescription, addVendor, -inputPaymentAmount));
+        transactions.add(new Transaction(formattedDate, formattedTime, userInput[1], userInput[2], -inputPaymentAmount));
         try {
             FileWriter fw = new FileWriter(FILE_NAME,true);
-            fw.write(formattedDate + "|" + formattedTime + "|" + addDescription + "|" + addVendor + "|" + -inputPaymentAmount + "\n");
-            fw.close();
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(formattedDate + "|" + formattedTime + "|" + userInput[1] + "|" + userInput[2] + "|" + -inputPaymentAmount + "\n");
+            bw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         transactions.sort((Transaction t1, Transaction t2) -> t2.getDate().compareTo(t1.getDate()));
     }
+    private static String[] userInputAdd (Scanner scanner) {
+        System.out.println("Enter Date: (yyyy-mm-dd and HH:mm:ss)");
+        String addDateTime = scanner.nextLine();
+        System.out.println("Enter description:");
+        String addDescription = scanner.nextLine();
+        System.out.println("Enter vendor:");
+        String addVendor = scanner.nextLine();
 
+        return new String[]{addDateTime,addDescription,addVendor};
+    }
     /* ------------------------------------------------------------------
        Ledger menu
        ------------------------------------------------------------------ */
