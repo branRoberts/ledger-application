@@ -1,16 +1,31 @@
-# Project Title
+# Accounting Ledger Application
 
 ## Description of the Project
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
+FinancialTracker is a java application for individuals who want a simple way to track their personal transactions. The intended users are anyone who wants to 
+record and review their income and expenses without needing a complex tool. This java application allows the user to record deposits and payments to a csv file,
+view their full transaction history and, filter transactions by deposits or payment. Furthermore, you can filter by dates; month to current date, the 
+previous month, current year to current date and, previous year. Also, you can search by vendor.
+
+This app aims to solve the problem of keeping a simple and organized way to track personal transactions through this app and the csv file.
 
 ## User Stories
 
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
-- As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
 
+- As a user, I want to see a home screen menu, so that I can choose what I want to do in the app.
+- As a user, I want to be able to load my past transactions when the app starts, so that I can see my previous history.
+- As a user, I want to be able to add a deposit, so that I can save deposit records to the CSV file.
+- As a user, I want to be able to make a payment, so that I can record debit transactions to the CSV file.
+- As a user, I want to view all ledger entries, so that I can see my full transaction history.
+- As a user, I want to filter the ledger by deposits, so that I can see only money added to my account.
+- As a user, I want to filter the ledger by payments, so that I can see only money that was spent.
+- As a user, I want to run a Month-To-Date report, so that I can view all transactions from this month.
+- As a user, I want to run a Previous Month report, so that I can review last month's transactions.
+- As a user, I want to run a Year-To-Date report, so that I can see all transactions this year.
+- As a user, I want to run a Previous Year report, so that I can review all transactions from last year.
+- As a user, I want to search transactions by vendor, so that I can see all entries for a specific vendor.
+- As a user, I want to navigate back from any screen, so that I can move freely through the app.
 ## Setup
 
 Instructions on how to set up and run the project using IntelliJ IDEA.
@@ -32,34 +47,47 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java 17
 
 ## Demo
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
 
-![Application Screenshot](path/to/your/screenshot.png)
+Starting menu:
+- ![img.png](img.png)
+- Add deposit:
+- ![img_3.png](img_3.png)
+- Add payment:
+- ![img_4.png](img_4.png)
+
+Ledger menu:
+
+- ![img_1.png](img_1.png)
+- All option in ledger:
+- ![img_2.png](img_2.png)
+- Deposits in ledger menu:
+- ![img_5.png](img_5.png)
+- Payments in Ledger menu:
+- ![img_6.png](img_6.png)
+- Reports in the Ledger menu:
+- ![img_7.png](img_7.png)
+
 
 ## Future Work
+Custom Search 
 
-Outline potential future enhancements or functionalities you might consider adding:
-
-- Additional feature to be developed.
-- Improvement of current functionalities.
+Insert a feature that would allow users to search transactions using any combination of filters including date range, description, vendor, and exact amount.
 
 ## Resources
 
-List resources such as tutorials, articles, or documentation that helped you during the project.
-
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- [Java Visual Learning Hub](https://raymaroun.github.io/yearup-java-visuals/)
+- [Java W3 Schools](https://www.w3schools.com/java/default.asp)
+- [GeekforGeeks](https://www.geeksforgeeks.org/java/java/)
 
 
 ## Thanks
 
-Express gratitude towards those who provided help, guidance, or resources:
 
-- Thank you to [Mentor's Name] for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+- Thank you to Raymond for continuous support and guidance.
+- Thank you to my peers for support
+
  
